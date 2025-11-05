@@ -58,7 +58,7 @@ void loop() {
 
     while (client.connected()) {
       if (client.available()) {
-        readAndWriteWiFi(client);
+        handleTraffic(client);
       }
     }
 
@@ -68,26 +68,47 @@ void loop() {
 }
 
 
-void readAndWriteWiFi(WiFiClient client){
-  String msg = client.readStringUntil('\n');
-  msg.trim(); // Remove \r and spaces
-
+void handleTraffic(WiFiClient client){
   time = millis();
 
-  if (msg.length() > 0 && time - prevStreamTime >= streamTimeout) {
+  // Retrieve the data from the client
+  String msg = client.readStringUntil('\n');
+  msg.trim(); // Remove \n, \r, and spaces.
+
+  if (time - prevStreamTime >= streamTimeout) {
     prevStreamTime = time;
 
-    Serial.println("Godot: " + msg);
+    if (msg.length() > 0) {
+      handleIncoming(msg); 
+    } 
 
-    if (strToBool(msg)){
-      digitalWrite(LED_BUILTIN, HIGH);
-    }
-    else {
-      digitalWrite(LED_BUILTIN, LOW);
-    }
-
-    client.println("Arduino echo: " + msg);
+    handleOutgoing(client);
   }
+}
+
+
+// Incoming client traffic
+void handleIncoming(String msg){
+  // VVV Defining functionality VVV
+  Serial.println("Godot: " + msg);
+
+  if (strToBool(msg)){
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+}
+
+
+// Outgoing client traffic
+void handleOutgoing(WiFiClient client){
+  // VVV Defining functionality VVV
+  String outgoing = ""; // Defines what data gets sent out to the client.
+  outgoing = "Arduino echo: " + String(digitalRead(LED_BUILTIN));
+
+  // Send data to the client
+  client.println(outgoing);
 }
 
 

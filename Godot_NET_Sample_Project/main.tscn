@@ -71,5 +71,5 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "Connected"
+text = "..."
 label_settings = SubResource("LabelSettings_ig7tw")
