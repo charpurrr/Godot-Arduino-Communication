@@ -11,6 +11,6 @@ Now we can open up the Godot Sample Project and load into our main scene `main.t
 Run the project by pressing F5. After connecting successfully, the Godot game will show the data being echoed through Arduino on a label in the center of the screen. This is merely for debugging purposes, but can be repurposed into responsive UI or similar. The ToggleButton on top toggles the builtin-LED on the Arduino.
 
 ## Building Upon This
-In both the Arduino and Godot sample projects, methods exist that define incoming- and outgoing traffic behaviour. These methods are called `HandleIncoming()` and `HandleOutgoint()` respectively. (Capitalised differently based on C++ or C#.)
+In both the Arduino and Godot sample projects, methods exist that define incoming- and outgoing traffic behaviour. These methods are called `HandleIncoming()` and `HandleOutgoing()` respectively. (Capitalised differently based on C++ or C#.)
 
 Defining your own functionality is as simple as rewriting the body in these methods with your own desired behaviour.
