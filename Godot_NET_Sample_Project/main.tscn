@@ -1,75 +1,269 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpcs3ui7m4p83"]
+[gd_scene load_steps=16 format=3 uid="uid://bpcs3ui7m4p83"]
 
-[ext_resource type="Script" uid="uid://4dmhmf7j0tt5" path="res://DataStream.cs" id="1_ig7tw"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
-font_size = 32
-font_color = Color(0, 0, 0, 1)
+[ext_resource type="Script" uid="uid://iuen5yo4a2lw" path="res://Networking.cs" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bca4g8pavr5ly" path="res://health_bar.gd" id="2_0xm2m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ig7tw"]
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="Control" type="Control" node_paths=PackedStringArray("Button", "StatusLabel", "DataLabel")]
-layout_mode = 3
+[sub_resource type="SystemFont" id="SystemFont_0xm2m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
+font = SubResource("SystemFont_0xm2m")
+font_size = 32
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="Gradient" id="Gradient_h2yge"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.215902, 0.215902, 0.215902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0xm2m"]
+gradient = SubResource("Gradient_h2yge")
+
+[sub_resource type="Gradient" id="Gradient_1bvp3"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.819412, 0.872157, 0.376471, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lquwl"]
+gradient = SubResource("Gradient_1bvp3")
+fill_to = Vector2(0.995726, 0)
+
+[sub_resource type="Gradient" id="Gradient_272bh"]
+offsets = PackedFloat32Array(0, 0.1, 0.5, 0.9, 1)
+colors = PackedColorArray(0.639216, 0, 0.27451, 1, 1, 0.345098, 0.278431, 1, 0.929412, 0.898039, 0.376471, 1, 0.529412, 0.803922, 0.376471, 1, 0, 0.745098, 0.337255, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7mycd"]
+gradient = SubResource("Gradient_272bh")
+
+[sub_resource type="Gradient" id="Gradient_5vw27"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.669412, 0.836863, 0.376471, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kek77"]
+gradient = SubResource("Gradient_5vw27")
+fill_to = Vector2(0.995726, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
+font_size = 32
+
+[node name="ColorRect" type="ColorRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.870244, 0.781709, 0.72458, 1)
+
+[node name="Networking" type="Node" parent="." node_paths=PackedStringArray("StatusLabel")]
 script = ExtResource("1_ig7tw")
-IP = "10.178.186.88"
-Button = NodePath("Button")
-StatusLabel = NodePath("Status")
-DataLabel = NodePath("Data")
+IP = "192.168.4.1"
+StatusLabel = NodePath("../HBoxContainer/Label")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Data" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Data"
-label_settings = SubResource("LabelSettings_0xm2m")
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -116.0
-offset_top = -218.0
-offset_right = 116.0
-offset_bottom = -118.0
-grow_horizontal = 2
-grow_vertical = 2
-toggle_mode = true
-text = "Toggle Builtin LED"
-
-[node name="Status" type="Label" parent="."]
+[node name="ConnectionStatus" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
+offset_top = -28.0
 offset_right = 40.0
 grow_vertical = 0
 text = "..."
 label_settings = SubResource("LabelSettings_ig7tw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -156.0
+offset_right = 103.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.733333, 0.294118, 1)
+
+[node name="StatusBar" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="LeftPadding" type="Control" parent="StatusBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="StatusBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_constants/v_separation = -16
+columns = 2
+
+[node name="Label" type="Label" parent="StatusBar/GridContainer"]
+layout_mode = 2
+text = "CO₂"
+label_settings = SubResource("LabelSettings_1bvp3")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatusBar/GridContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PaddingTop" type="Control" parent="StatusBar/GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Panel" type="Panel" parent="StatusBar/GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="PanelContainer" type="PanelContainer" parent="StatusBar/GridContainer/VBoxContainer/Panel"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.1
+anchor_right = 0.99
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="StatusBar/GridContainer/VBoxContainer/Panel/PanelContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+value = 61.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_0xm2m")
+texture_progress = SubResource("GradientTexture2D_lquwl")
+script = ExtResource("2_0xm2m")
+progress_texture_map = SubResource("GradientTexture2D_7mycd")
+
+[node name="PaddingBottom" type="Control" parent="StatusBar/GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label2" type="Label" parent="StatusBar/GridContainer"]
+layout_mode = 2
+text = "O₂"
+label_settings = SubResource("LabelSettings_1bvp3")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="StatusBar/GridContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PaddingTop" type="Control" parent="StatusBar/GridContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Panel" type="Panel" parent="StatusBar/GridContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="PanelContainer" type="PanelContainer" parent="StatusBar/GridContainer/VBoxContainer2/Panel"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.1
+anchor_right = 0.99
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="StatusBar/GridContainer/VBoxContainer2/Panel/PanelContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+value = 76.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_0xm2m")
+texture_progress = SubResource("GradientTexture2D_kek77")
+script = ExtResource("2_0xm2m")
+progress_texture_map = SubResource("GradientTexture2D_7mycd")
+
+[node name="PaddingBottom" type="Control" parent="StatusBar/GridContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="RightPadding" type="Control" parent="StatusBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lvl 1"
+
+[node name="Control2" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "(0) x200"
+label_settings = SubResource("LabelSettings_h2yge")
+horizontal_alignment = 1
+
+[node name="Control3" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Options"
+
+[node name="Control4" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

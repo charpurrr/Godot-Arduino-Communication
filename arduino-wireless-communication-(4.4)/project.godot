@@ -1,0 +1,23 @@
+config_version=5
+
+[application]
+
+config/name="Arduino Wireless Communication (4.4)"
+run/main_scene="uid://bpcs3ui7m4p83"
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=540
+window/size/viewport_height=1200
+
+[dotnet]
+
+project/assembly_name="Serre Game"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

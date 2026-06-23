@@ -1,25 +1,26 @@
 #include <SPI.h>
 #include <WiFiNINA.h>
 
-char ssid[] = "Kitsunetwork";
-char pass[] = "unfl3934";
-long int port = 80;
+char ssid[] = "Kitsunetwork";   // The Network SSID
+char pass[] = "unfl3934";       // The Network password
+long int port = 80;             // The Network communication port
 
-int status = WL_IDLE_STATUS;
-WiFiServer server(port);
+int status = WL_IDLE_STATUS;    // The server status
+WiFiServer server(port);        // The server object
 
-unsigned long time = 0;
-unsigned long prevStreamTime = 0;
-const unsigned long streamTimeout = 1000; // How fast data will be sent and received. (in ms)
+const unsigned long streamTimeout = 1000;   // How fast data will be sent and received. (in ms)
+unsigned long prevStreamTime = 0;           // Used to compare stream time intervals. (in ms)
+unsigned long time = 0;                     // Current Arduino uptime. (in ms)
 
 
 void setup() {
+  // Start serial communication for debugging purposes
   Serial.begin(9600);
 
   while (!Serial) {}
   Serial.println("Serial communication opened.");
 
-  // Check module
+  // Check for Wi-Fi module
   if (WiFi.status() == WL_NO_MODULE){
     Serial.println("WiFi connection failed.");
     while(true){}
@@ -107,7 +108,7 @@ void handleIncoming(String msg){
 // Outgoing client traffic
 void handleOutgoing(WiFiClient client){
   // VVV Defining functionality VVV
-  String outgoing = ""; // Defines what data gets sent out to the client.
+  String outgoing = ""; // Defines what data gets sent out to the client
   outgoing = "Arduino echo: " + String(digitalRead(LED_BUILTIN));
 
   // Send data to the client
@@ -115,6 +116,8 @@ void handleOutgoing(WiFiClient client){
 }
 
 
+// Converts a string version of a bool back to a typed bool.
+// Useful when interpreting data sent from the client.
 bool strToBool(String input){
   input.toUpperCase();
   return (input == "1" || input == "TRUE");
